@@ -32,33 +32,37 @@ public class StringProcessing {
                 String firstName =  line[0].trim();
                 String lastName =  line[1].trim();
                 String gender = line[2].trim();
+                if((line[3].trim()).equals("")){
+                    System.out.println("Age invalid, cannot be empty");
+                    continue;
+                }
                 int age = Integer.parseInt(line[3].trim());
                 String phoneNumber = line[4].trim();
                 String emailAddress = line[5].trim();
                  if (!firstNameIsValid(firstName)) {
-                    System.out.println("Firstname is not valid: " + firstName);
+                    System.out.println("Firstname is not valid: " + firstName + "Must only have upper and lower case letters");
                     continue;
                 }
                 
                 if (!firstNameIsValid(lastName)) {
-                    System.out.println("LastName is not valid: " + lastName);
+                    System.out.println("LastName is not valid: " + lastName + "Must only have upper or lower case letters");
                     continue;
                 }
                 
                 if (!genderIsValid(gender)) {
-                    System.out.println("LastName is not valid: " + gender);
+                    System.out.println("LastName is not valid: " + gender + "Must be male or female");
                     continue;
                 }
                 if(!ageIsValid(age)){
-                    System.out.println("Age is not valid: " + age);
+                    System.out.println("Age is not valid: " + age + "Age must be between 1 and 130.");
                     continue;
                 }
                 if(!phoneNumberIsValid(phoneNumber)){
-                    System.out.println("PhoneNumber is not valid:" + phoneNumber);
+                    System.out.println("PhoneNumber is not valid:" + phoneNumber + "PhoneNumber has to be 10 digits only");
                     continue;
                 }
                 if(!emailAddressIsValid(emailAddress)){
-                    System.out.println("EmailAddress is not valid:" + emailAddress);
+                    System.out.println("EmailAddress is not valid:" + emailAddress + "EmailAddress must start eith letters and can only have letters, digits, periods and end with .net/.com");
                     continue;
                             
                     
@@ -67,11 +71,14 @@ public class StringProcessing {
                     
                 
                 records[currentIndex] = String.format("%-20s%-20s%-20s%-20d%-20s%-20s", firstName, lastName, gender, age, phoneNumber, emailAddress);
-                System.out.println(records[currentIndex]);
+                //System.out.println(records[currentIndex]);
                 currentIndex++;
             }
                 
-            
+            for(int i = 0; i < records.length; i++){
+                System.out.println(records[i]);
+                
+            }
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(StringProcessing.class.getName()).log(Level.SEVERE, null, ex);
@@ -114,7 +121,7 @@ public class StringProcessing {
        }
    }
    private static boolean emailAddressIsValid(String emailAddress){
-       if(emailAddress.matches("[A-Za-z][A-Za-z0-9\\.]+@[A-Za-z0-9]+[\\.](?:net|com")){
+       if(emailAddress.matches("[A-Za-z][A-Za-z0-9\\.]+@[A-Za-z0-9]+[\\.](?:net|com)")){
            return true;
        }else{
            return false;
